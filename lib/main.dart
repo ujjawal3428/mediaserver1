@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:media_server/widgets/home.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  print("Starting app..."); 
-  runApp(const MyApp()); 
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,12 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Building MyApp..."); 
     return MaterialApp(
-      title: 'My Flutter App',
+      title: 'Media Server',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      home: const HomeScreen(), 
+      home: const HomeScreen(),
     );
   }
 }
