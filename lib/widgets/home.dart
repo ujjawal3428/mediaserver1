@@ -150,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   );
 }
 
-
   Widget _buildDrawerHeader() {
     return Container(
       padding: EdgeInsets.only(
