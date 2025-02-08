@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:media_server/widgets/home.dart';
-import 'theme.dart'; 
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Media Server',
-      theme: fancyTheme,
       home: const HomeScreen(),
     );
   }

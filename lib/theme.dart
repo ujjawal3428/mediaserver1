@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 ThemeData fancyTheme = ThemeData(
   brightness: Brightness.light,
-  primarySwatch: Colors.purple,
-  scaffoldBackgroundColor: const Color.fromARGB(255, 196, 178, 129),
+  primarySwatch: Colors.yellow,
+  scaffoldBackgroundColor: const Color.fromARGB(255, 35, 165, 109),
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.deepPurple,
     titleTextStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
