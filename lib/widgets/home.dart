@@ -236,6 +236,7 @@ class _HomeScreenState extends State<HomeScreen>
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   itemCount: 10,
+                  shrinkWrap: true,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: _buildMediaItem(index),
