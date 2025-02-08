@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen>
   final Color drawerColor = const Color.fromARGB(255, 28, 44, 58);
   final Color mediaItemColor = const Color(0xFF3C5665);
   final Color mediaTitleColor = const Color(0xFF5A7480);
-  final Color textColor = const Color(0xFF92A4B1);
+  final Color textColor = Colors.white;
 
   // Drawer width constant
   final double drawerWidth = 250;
@@ -120,8 +120,7 @@ class _HomeScreenState extends State<HomeScreen>
         alignment: Alignment.centerLeft,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
-          opacity:
-              (isDrawerOpen || isDesktop) ? 1.0 : 0.0, // Hide content properly
+          opacity: (isDrawerOpen || isDesktop) ? 1.0 : 0.0,
           child: OverflowBox(
             maxWidth: drawerWidth,
             child: Container(
