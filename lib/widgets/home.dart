@@ -7,7 +7,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   bool isGridView = true;
   bool isDrawerOpen = false;
 
@@ -110,47 +111,47 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
- Widget _buildAnimatedDrawer({required bool isDesktop}) {
-  return AnimatedContainer(
-    duration: const Duration(milliseconds: 400),
-    width: (isDrawerOpen || isDesktop) ? drawerWidth : 0,
-    curve: Curves.easeInOut,
-    child: Align(
-      alignment: Alignment.centerLeft,
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 300),
-        opacity: (isDrawerOpen || isDesktop) ? 1.0 : 0.0, // Hide content properly
-        child: OverflowBox(
-          maxWidth: drawerWidth,
-          child: Container(
-            width: drawerWidth,
-            decoration: BoxDecoration(
-              color: drawerColor,
-              boxShadow: [
-                BoxShadow(
-                  color: mediaTitleColor.withAlpha(80),
-                  blurRadius: 10,
-                  spreadRadius: 5,
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                _buildDrawerHeader(),
-                _buildDrawerItem(Icons.home, "Home", () {}),
-                _buildDrawerItem(Icons.help_outline, "Help", () {}),
-                _buildDrawerItem(Icons.settings, "Settings", () {}),
-                const Spacer(),
-                _buildDrawerImage(),
-              ],
+  Widget _buildAnimatedDrawer({required bool isDesktop}) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      width: (isDrawerOpen || isDesktop) ? drawerWidth : 0,
+      curve: Curves.easeInOut,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: AnimatedOpacity(
+          duration: const Duration(milliseconds: 300),
+          opacity:
+              (isDrawerOpen || isDesktop) ? 1.0 : 0.0, // Hide content properly
+          child: OverflowBox(
+            maxWidth: drawerWidth,
+            child: Container(
+              width: drawerWidth,
+              decoration: BoxDecoration(
+                color: drawerColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: mediaTitleColor.withAlpha(80),
+                    blurRadius: 10,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  _buildDrawerHeader(),
+                  _buildDrawerItem(Icons.home, "Home", () {}),
+                  _buildDrawerItem(Icons.help_outline, "Help", () {}),
+                  _buildDrawerItem(Icons.settings, "Settings", () {}),
+                  const Spacer(),
+                  _buildDrawerImage(),
+                ],
+              ),
             ),
           ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   Widget _buildDrawerHeader() {
     return Container(
@@ -219,29 +220,37 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           crossAxisCount = 2;
         }
 
+        debugPrint("Building Media View: isGridView = $isGridView");
+
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: isGridView
-              ? GridView.builder(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 0.8,
-                  ),
-                  itemCount: 10,
-                  itemBuilder: (context, index) => _buildMediaItem(index),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  itemCount: 10,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: _buildMediaItem(index),
-                  ),
-                ),
-        );
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: isGridView
+                ? GridView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.8,
+                    ),
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      debugPrint("Rendering Grid Item: $index");
+                      return _buildMediaItem(index);
+                    },
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    itemCount: 10,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: SizedBox(
+                        // Constrain height
+                        height: 200, // Adjust this value as needed
+                        child: _buildMediaItem(index),
+                      ),
+                    ),
+                  ));
       },
     );
   }
@@ -252,11 +261,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       shadowColor: mediaTitleColor.withAlpha(128),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
+      child: SizedBox(
+        height: 200, // Ensure a fixed height for each item
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              // Remove Expanded to avoid flex issues
+              height: 140, // Define a specific height
               decoration: BoxDecoration(
                 color: mediaTitleColor,
                 borderRadius: const BorderRadius.only(
@@ -268,21 +280,21 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 child: Icon(Icons.image, size: 50, color: textColor),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Text(
-              "Media Item $index",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: textColor,
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                "Media Item $index",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
