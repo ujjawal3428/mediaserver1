@@ -155,8 +155,7 @@ class _HomeScreenState extends State<HomeScreen>
         alignment: Alignment.centerLeft,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
-          opacity:
-              (isDrawerOpen || isDesktop) ? 1.0 : 0.0, // Hide content properly
+          opacity: (isDrawerOpen || isDesktop) ? 1.0 : 0.0,
           child: OverflowBox(
             maxWidth: drawerWidth,
             child: Container(
@@ -256,37 +255,29 @@ class _HomeScreenState extends State<HomeScreen>
           crossAxisCount = 2;
         }
 
-        debugPrint("Building Media View: isGridView = $isGridView");
-
         return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: isGridView
-                ? GridView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 0.8,
-                    ),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      debugPrint("Rendering Grid Item: $index");
-                      return _buildMediaItem(index);
-                    },
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    itemCount: 10,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: SizedBox(
-                        // Constrain height
-                        height: 200, // Adjust this value as needed
-                        child: _buildMediaItem(index),
-                      ),
-                    ),
-                  ));
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: isGridView
+              ? GridView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.8,
+                  ),
+                  itemCount: 10,
+                  itemBuilder: (context, index) => _buildMediaItem(index),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  itemCount: 10,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: _buildMediaItem(index),
+                  ),
+                ),
+        );
       },
     );
   }
