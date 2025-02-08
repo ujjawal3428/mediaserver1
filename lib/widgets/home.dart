@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen>
   final Color drawerColor = const Color.fromARGB(255, 28, 44, 58);
   final Color mediaItemColor = const Color(0xFF3C5665);
   final Color mediaTitleColor = const Color(0xFF5A7480);
-  final Color textColor = Colors.white;
+  final Color textColor = const Color(0xFF92A4B1);
 
   // Drawer width constant
   final double drawerWidth = 250;
@@ -111,41 +111,6 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-<<<<<<< HEAD
- Widget _buildAnimatedDrawer({required bool isDesktop}) {
-  return AnimatedContainer(
-    duration: const Duration(milliseconds: 400),
-    width: (isDrawerOpen || isDesktop) ? drawerWidth : 0,
-    curve: Curves.easeInOut,
-    child: Align(
-      alignment: Alignment.centerLeft,
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 300),
-        opacity: (isDrawerOpen || isDesktop) ? 1.0 : 0.0, 
-        child: OverflowBox(
-          maxWidth: drawerWidth,
-          child: Container(
-            width: drawerWidth,
-            decoration: BoxDecoration(
-              color: drawerColor,
-              boxShadow: [
-                BoxShadow(
-                  color: mediaTitleColor.withAlpha(80),
-                  blurRadius: 10,
-                  spreadRadius: 5,
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                _buildDrawerHeader(),
-                _buildDrawerItem(Icons.home, "Home", () {}),
-                _buildDrawerItem(Icons.help_outline, "Help", () {}),
-                _buildDrawerItem(Icons.settings, "Settings", () {}),
-                const Spacer(),
-                _buildDrawerImage(),
-              ],
-=======
   Widget _buildAnimatedDrawer({required bool isDesktop}) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 400),
@@ -155,7 +120,8 @@ class _HomeScreenState extends State<HomeScreen>
         alignment: Alignment.centerLeft,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
-          opacity: (isDrawerOpen || isDesktop) ? 1.0 : 0.0,
+          opacity:
+              (isDrawerOpen || isDesktop) ? 1.0 : 0.0, // Hide content properly
           child: OverflowBox(
             maxWidth: drawerWidth,
             child: Container(
@@ -180,7 +146,6 @@ class _HomeScreenState extends State<HomeScreen>
                   _buildDrawerImage(),
                 ],
               ),
->>>>>>> 6c40bad6dca6d49d6a92c22f89b3f8bdecdc90b9
             ),
           ),
         ),
@@ -288,14 +253,11 @@ class _HomeScreenState extends State<HomeScreen>
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       shadowColor: mediaTitleColor.withAlpha(128),
-      child: SizedBox(
-        height: 200, // Ensure a fixed height for each item
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              // Remove Expanded to avoid flex issues
-              height: 140, // Define a specific height
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Container(
               decoration: BoxDecoration(
                 color: mediaTitleColor,
                 borderRadius: const BorderRadius.only(
@@ -307,21 +269,21 @@ class _HomeScreenState extends State<HomeScreen>
                 child: Icon(Icons.image, size: 50, color: textColor),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text(
-                "Media Item $index",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              "Media Item $index",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: textColor,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
