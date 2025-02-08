@@ -6,9 +6,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   bool isGridView = true;
   bool isDrawerOpen = false;
 
@@ -111,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-<<<<<<< HEAD
  Widget _buildAnimatedDrawer({required bool isDesktop}) {
   return AnimatedContainer(
     duration: const Duration(milliseconds: 400),
@@ -145,48 +142,14 @@ class _HomeScreenState extends State<HomeScreen>
                 const Spacer(),
                 _buildDrawerImage(),
               ],
-=======
-  Widget _buildAnimatedDrawer({required bool isDesktop}) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 400),
-      width: (isDrawerOpen || isDesktop) ? drawerWidth : 0,
-      curve: Curves.easeInOut,
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: AnimatedOpacity(
-          duration: const Duration(milliseconds: 300),
-          opacity: (isDrawerOpen || isDesktop) ? 1.0 : 0.0,
-          child: OverflowBox(
-            maxWidth: drawerWidth,
-            child: Container(
-              width: drawerWidth,
-              decoration: BoxDecoration(
-                color: drawerColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: mediaTitleColor.withAlpha(80),
-                    blurRadius: 10,
-                    spreadRadius: 5,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  _buildDrawerHeader(),
-                  _buildDrawerItem(Icons.home, "Home", () {}),
-                  _buildDrawerItem(Icons.help_outline, "Help", () {}),
-                  _buildDrawerItem(Icons.settings, "Settings", () {}),
-                  const Spacer(),
-                  _buildDrawerImage(),
-                ],
-              ),
->>>>>>> 6c40bad6dca6d49d6a92c22f89b3f8bdecdc90b9
             ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   Widget _buildDrawerHeader() {
     return Container(
@@ -288,14 +251,11 @@ class _HomeScreenState extends State<HomeScreen>
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       shadowColor: mediaTitleColor.withAlpha(128),
-      child: SizedBox(
-        height: 200, // Ensure a fixed height for each item
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              // Remove Expanded to avoid flex issues
-              height: 140, // Define a specific height
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Container(
               decoration: BoxDecoration(
                 color: mediaTitleColor,
                 borderRadius: const BorderRadius.only(
@@ -307,21 +267,21 @@ class _HomeScreenState extends State<HomeScreen>
                 child: Icon(Icons.image, size: 50, color: textColor),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text(
-                "Media Item $index",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              "Media Item $index",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: textColor,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
