@@ -12,10 +12,10 @@ class _HomeScreenState extends State<HomeScreen>
   bool isGridView = true;
   bool isDrawerOpen = false;
 
-  final Color primaryColor = const Color(0xFF1E2025);
-  final Color drawerColor = const Color.fromARGB(255, 28, 44, 58);
-  final Color mediaItemColor = const Color(0xFF3C5665);
-  final Color mediaTitleColor = const Color(0xFF5A7480);
+  final Color primaryColor = Color(0xFF181818);
+  final Color drawerColor = Color.fromARGB(255, 57, 130, 132); // Muted Teal
+  final Color mediaItemColor =   Color.fromARGB(255, 82, 115, 119); // Electric Blue
+  final Color mediaTitleColor =  Color(0xFF2F3E46);   // Soft Silver
   final Color textColor = Colors.white;
 
   // Drawer width constant
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
     bool isDesktop = MediaQuery.of(context).size.width > 900;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 177, 204, 195),
+      backgroundColor: const Color.fromARGB(255, 181, 188, 197),
       body: Row(
         children: [
           _buildAnimatedDrawer(isDesktop: isDesktop),
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Column(
                     children: [
                       _buildAppBar(isDesktop),
-                      Expanded(child: _buildMediaView()),
+                      Expanded(child: _buildMediaView()), 
                     ],
                   ),
                 ),
@@ -55,10 +55,14 @@ class _HomeScreenState extends State<HomeScreen>
         padding: EdgeInsets.only(
           right: (isDrawerOpen || isDesktop) ? drawerWidth / 4 : 16,
         ),
-        child: FloatingActionButton(
-          backgroundColor: mediaTitleColor,
-          onPressed: () {},
-          child: Icon(Icons.upload, color: textColor),
+        child: Positioned(
+          right: 0,
+          bottom: 20,
+          child: FloatingActionButton(
+            backgroundColor: mediaTitleColor,
+            onPressed: () {},
+            child: Icon(Icons.upload, color: textColor),
+          ),
         ),
       ),
     );
@@ -66,14 +70,13 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildAppBar(bool isDesktop) {
     return Container(
-      height: 60,
+      height: 70,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       margin: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top,
         right: 8,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      child: Column(
         children: [
           IconButton(
             icon: Icon(
@@ -87,6 +90,9 @@ class _HomeScreenState extends State<HomeScreen>
               });
             },
           ),
+           Text('Media', style: TextStyle(
+            fontSize: 18,
+           ),),
         ],
       ),
     );
