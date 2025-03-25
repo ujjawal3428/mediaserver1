@@ -13,9 +13,9 @@ class _HomeScreenState extends State<HomeScreen>
   bool isDrawerOpen = false;
 
   final Color primaryColor = Color(0xFF181818);
-  final Color drawerColor = Color.fromARGB(255, 57, 130, 132); // Muted Teal
-  final Color mediaItemColor =   Color.fromARGB(255, 82, 115, 119); // Electric Blue
-  final Color mediaTitleColor =  Color(0xFF2F3E46);   // Soft Silver
+  final Color drawerColor = Color.fromARGB(255, 195, 32, 75); // Drawer
+  final Color mediaItemColor =   Color.fromARGB(255, 255, 120, 136); //video title background
+  final Color mediaTitleColor =  Color(0xFF2F3E46);   // thumbnail background
   final Color textColor = Colors.white;
 
   // Drawer width constant
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
     bool isDesktop = MediaQuery.of(context).size.width > 900;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 181, 188, 197),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: Row(
         children: [
           _buildAnimatedDrawer(isDesktop: isDesktop),
@@ -69,31 +69,43 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildAppBar(bool isDesktop) {
-    return Container(
-      height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      margin: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        right: 8,
-      ),
-      child: Column(
-        children: [
-          IconButton(
-            icon: Icon(
-              isGridView ? Icons.list : Icons.grid_view,
-              color: textColor,
-              size: 28,
-            ),
-            onPressed: () {
-              setState(() {
-                isGridView = !isGridView;
-              });
-            },
+    return Positioned(
+      top: 10,
+      right: 10,
+      child: Container(
+        height: 70,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        margin: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top,
+          right: 8,
+        ),
+        child: GestureDetector(
+          onTap: (){
+            setState(() {
+                  isGridView = !isGridView;
+                });
+          },
+          child: Column(
+            children: [
+              IconButton(
+                icon: Icon(
+                  isGridView ? Icons.list : Icons.grid_view,
+                  color: textColor,
+                  size: 28,
+                ),
+                onPressed: () {
+                   setState(() {
+                  isGridView = !isGridView;
+                });
+                },
+              ),
+               Text('Media', style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+               ),),
+            ],
           ),
-           Text('Media', style: TextStyle(
-            fontSize: 18,
-           ),),
-        ],
+        ),
       ),
     );
   }
